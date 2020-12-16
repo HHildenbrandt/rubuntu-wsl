@@ -9,6 +9,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 dism.exe /online /enable-feature featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
+
 It says `/norestart` but, yeah, reboot.
 
 ## 2. Download and install the Linux kernel update package
@@ -24,37 +25,58 @@ wsl --set-default-version 2
 ```
 
 ## 4. Download Ubuntu 20.04
+
 Linux distros can be installed from the Microsoft store. But we can also just use:  
 https://aka.ms/wslubuntu2004
 Enter your Linux user name and password and you are ready to go.
+
 ```
 sudo apt update
 sudo apt upgrade -y
 ```
 
 ## 5. Fix the ssh port
+
 Per default, our new distro listen on port 22 for ssh connections.
 That might/will conflict with your Windows host, thus let's fix this:
+
 ```
 sudo nano /etc/ssh/sshd_config
 ```
+
 Replace the lines
+
 ```
 #port 22
 PasswordAuthentication no
 ```
+
 with
+
 ```
 port 2222
 PasswordAuthentication yes
 ```
-Press `CTRL-X y` to save the changes. Now, restart the ssh server:
+
+Press `CTRL-X y` to save the changes. Now, (re)start the ssh server:
+
 ```
 sudo ssh-keygen -A
 sudo service ssh start
 ```
-Now we can 'ssh' into the distro from CMD or PowerShell:
+Now we can 'ssh' into the distro from CMD or PowerShell (or remotely):
 ```
 ssh user@127.0.0.1 -p 2222
 ```
-or even remotely:
+
+## 6. Install Git, R and rstudio-server
+
+```
+sudo apt install git r-base r-base-core r-recommended r-base-dev gdebi-core build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev  
+
+wget https://rstudio.org/download/latest/stable/server/bionic/rstudio-server-latest-amd64.deb  
+
+sudo gdebi rstudio-server-latest-amd64.deb  
+```
+
+## 
