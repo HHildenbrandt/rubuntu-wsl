@@ -89,7 +89,7 @@ sudo rstudio-server start
 
 ## 8. Access the server
 
-Open your web-browser and navigate to: `http:\\127.0.0.1:8787`.
+Open your web-browser and navigate to: `http://127.0.0.1:8787`.
 
 ## 9. Autostart servers at Windows-boot
 
@@ -97,10 +97,25 @@ Back in Windows, create the file `rstudio-server.vbs`:
 ```
 Set ws = CreateObject("Wscript.Shell")  
 ws.run "wsl -d Ubuntu-20.04 -u root service ssh start", vbhide  
+ws.run "wsl -d Ubuntu-20.04 -u root rstudio-server start", vbhide  
 ```
 
 The type `Windows key + R` to open the run-command.
 Type `Shell:startup` to open the startup-folder.
 Move the .vbs file to this folder.
 
+## 10. Take a snapshot
 
+Now that we have a 'clean' installation, it's time to take our first
+snapshot. In PowerShell run:
+
+```
+wsl --export Ubuntu-20.04 rubuntu.tar.gz
+```
+
+This will create the file `rubuntu.tar.gz` which serves as backup, could be moved to a different machiene or simply 'imported' once you have messed up our install enough:
+
+```
+wsl --unregister Ubuntu-20.04
+wsl --import Ubuntu-20.04 rubuntu.tar.gz
+```
