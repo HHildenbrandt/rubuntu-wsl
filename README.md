@@ -91,7 +91,7 @@ sudo rstudio-server start
 
 Open your web-browser and navigate to: `http://127.0.0.1:8787`.
 
-## 9. Autostart servers at Windows-boot
+## 9. Autostart Linux servers at Windows-boot
 
 Back in Windows, create the file `rstudio-server.vbs`:
 ```
