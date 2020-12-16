@@ -79,4 +79,28 @@ wget https://rstudio.org/download/latest/stable/server/bionic/rstudio-server-lat
 sudo gdebi rstudio-server-latest-amd64.deb  
 ```
 
-## 
+Ignore the message `Couldn't find an alternative telinit implementation to spawn.`
+
+## 7. Start rstudio-server
+
+```
+sudo rstudio-server start
+```
+
+## 8. Access the server
+
+Open your web-browser and navigate to: `http:\\127.0.0.1:8787`.
+
+## 9. Autostart servers at Windows-boot
+
+Back in Windows, create the file `rstudio-server.vbs`:
+```
+Set ws = CreateObject("Wscript.Shell")  
+ws.run "wsl -d Ubuntu-20.04 -u root service ssh start", vbhide  
+```
+
+The type `Windows key + R` to open the run-command.
+Type `Shell:startup` to open the startup-folder.
+Move the .vbs file to this folder.
+
+
