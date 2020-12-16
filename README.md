@@ -113,7 +113,7 @@ snapshot. In PowerShell run:
 wsl --export Ubuntu-20.04 rubuntu.tar.gz
 ```
 
-This will create the file `rubuntu.tar.gz` which serves as backup, could be moved to a different machiene or simply 'imported' once you have messed up our install enough:
+This will create the file `rubuntu.tar.gz` which serves as backup, could be moved to a different machiene or simply 'imported' back once you have messed up our install enough:
 
 ```
 wsl --unregister Ubuntu-20.04
